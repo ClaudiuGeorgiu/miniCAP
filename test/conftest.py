@@ -5,11 +5,12 @@ import os
 import pytest_asyncio
 from fastapi import FastAPI
 from httpx import AsyncClient
+from sqlalchemy import insert
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
 from minicap.api import get_session
-from minicap.database import Base
+from minicap.database import Base, GeneratedCaptcha
 from minicap.main import app
 
 SQLITE_TEST_DATABASE_URL = "sqlite+aiosqlite:///" + os.path.abspath(
@@ -25,6 +26,11 @@ async def get_app() -> FastAPI:
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
+        await conn.execute(
+            insert(GeneratedCaptcha).values(
+                id="valid-captcha-id", text="valid-captcha-solution"
+            )
+        )
 
     async def override_get_session():
         async with async_test_session() as session:
