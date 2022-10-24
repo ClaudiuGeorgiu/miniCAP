@@ -263,6 +263,6 @@ class Captcha(object):
 
         captcha_img = captcha_img.filter(ImageFilter.SMOOTH)
 
-        captcha_img.thumbnail((self._width, self._height), Image.ANTIALIAS)
+        captcha_img.thumbnail((self._width, self._height), Image.Resampling.LANCZOS)
 
         return captcha_img
