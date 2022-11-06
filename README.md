@@ -7,14 +7,14 @@
 [![Windows Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/Windows/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AWindows)
 [![MacOS Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/MacOS/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AMacOS)
 [![Code Coverage](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP/badge.svg)](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP)
-[![Python Version](https://img.shields.io/badge/Python-3.10-green.svg?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3100/)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-green.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/blob/master/LICENSE)
 
 
 
-**miniCAP** is a simple microservice, written in `Python 3.10`, with only two REST
-endpoints: one for creating CAPTCHAs (`/api/captcha/generate/`) and one for verifying
-them (`/api/captcha/validate/`).
+**miniCAP** is a simple microservice, written in Python, with only two REST endpoints:
+one for creating CAPTCHAs (`/api/captcha/generate/`) and one for verifying them
+(`/api/captcha/validate/`).
 
 
 
@@ -22,9 +22,9 @@ them (`/api/captcha/validate/`).
 
 There are two ways of getting a working copy of miniCAP on your own computer: either
 by [using Docker](#docker-image) or by [using directly the source code](#from-source)
-in a `Python 3.10` environment. In both cases, the first thing to do is to get a local
-copy of this repository, so open up a terminal in the directory where you want to save
-the project and clone the repository:
+in a `Python 3` (at least `3.10`) environment. In both cases, the first thing to do is
+to get a local copy of this repository, so open up a terminal in the directory where you
+want to save the project and clone the repository:
 
 ```Shell
 $ git clone https://github.com/ClaudiuGeorgiu/miniCAP.git
@@ -86,8 +86,8 @@ information.
 
 #### Prerequisites
 
-The only requirement of this project is a working `Python 3.10` installation (along with
-its package manager `pip`).
+The only requirement of this project is a working `Python 3` (at least `3.10`)
+installation (along with its package manager `pip`).
 
 #### Install
 
