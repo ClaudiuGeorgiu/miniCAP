@@ -135,7 +135,7 @@ containing a previously generated `Captcha-Id` and the text displayed in the CAP
 The request must be a JSON containing a text field `id` with the value of `Captcha-Id`
 header and a text field `text` with the solution of the CAPTCHA.
 
-> **Note**
+> **Note**  
 > While the microservice is running, the complete REST OpenAPI documentation is
 > available at <http://localhost:8000/docs>.
 
