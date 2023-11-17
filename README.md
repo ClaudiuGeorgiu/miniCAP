@@ -41,7 +41,7 @@ a recent version of Docker installed:
 
 ```Shell
 $ docker --version
-Docker version 20.10.20, build 9fdeb9c
+Docker version 20.10.22, build 3a2c30b
 ```
 
 #### Official Docker Hub image

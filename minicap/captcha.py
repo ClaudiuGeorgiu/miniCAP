@@ -226,7 +226,7 @@ class Captcha(object):
         text_height = 2 * self._padding + max(
             map(
                 lambda item: item[0] + item[1],
-                zip(y, map(lambda l: l.size[1], letters)),
+                zip(y, map(lambda letter: letter.size[1], letters)),
             )
         )
 
