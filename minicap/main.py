@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import logging
+from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI
@@ -19,12 +20,22 @@ logging.basicConfig(
     level=logging.DEBUG,  # Set to INFO or ERROR in production.
 )
 
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    # Create database table(s) at startup.
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
+
 # Create FastAPI application.
 app = FastAPI(
     title="miniCAP",
     description="A simple and minimal microservice for generating and "
     "validating CAPTCHA.",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # Needed if the API is used by a browser. Origins should be set to the allowed domains
@@ -38,13 +49,6 @@ app.add_middleware(
 
 # Include API routes.
 app.include_router(api_router)
-
-
-# Create database table(s) at startup.
-@app.on_event("startup")
-async def startup():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 > A simple and minimal microservice for generating and validating CAPTCHA.
 
-[![Codacy](https://app.codacy.com/project/badge/Grade/f0c8737e04c045269e23f8a35735c7d7)](https://www.codacy.com/gh/ClaudiuGeorgiu/miniCAP)
+[![Codacy](https://app.codacy.com/project/badge/Grade/f0c8737e04c045269e23f8a35735c7d7)](https://app.codacy.com/gh/ClaudiuGeorgiu/miniCAP)
 [![Ubuntu Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/Ubuntu/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AUbuntu)
 [![Windows Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/Windows/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AWindows)
 [![MacOS Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/MacOS/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AMacOS)
