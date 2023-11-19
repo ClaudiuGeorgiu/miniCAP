@@ -4,6 +4,7 @@ import io
 import logging
 import uuid
 
+from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,6 +20,7 @@ from minicap.database import (
 from minicap.schemas import CaptchaValidationRequest, CaptchaValidationResponse
 
 MAX_VALIDATION_REQUESTS = 3
+MAX_DURATION_IN_MINUTES = 10
 
 logger = logging.getLogger(__name__)
 
@@ -106,11 +108,21 @@ async def validate_captcha(
     session: AsyncSession = Depends(get_session),
 ):
     existing_captcha = await get_generated_captcha(session, validation_request.id)
+
+    if (
+        existing_captcha
+        and existing_captcha.timestamp + timedelta(minutes=MAX_DURATION_IN_MINUTES)
+        <= datetime.utcnow()
+    ):
+        await delete_captcha_from_db(session, existing_captcha)
+        existing_captcha = None
+
     if not existing_captcha:
         response.status_code = status.HTTP_404_NOT_FOUND
         return CaptchaValidationResponse(
             status=response.status_code, message="CAPTCHA to validate not found"
         )
+
     if validation_request.text.lower() == existing_captcha.text.lower():
         # Make CAPTCHA validation case insensitive.
         await delete_captcha_from_db(session, existing_captcha)

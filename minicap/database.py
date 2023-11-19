@@ -22,7 +22,7 @@ class GeneratedCaptcha(Base):
 
     id = Column(String, primary_key=True, index=True)
     text = Column(String, nullable=False)
-    timestamp = Column(DateTime, nullable=False, default=datetime.now)
+    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
     validation_counter = Column(Integer, nullable=False, default=0)
 
 

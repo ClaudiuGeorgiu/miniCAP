@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import datetime
+import minicap.api
+
 import pytest
 from fastapi import status
 from httpx import AsyncClient
@@ -51,3 +54,21 @@ class TestApi:
 
         last_response = await ac_client.post("/api/captcha/validate/", json=request)
         assert last_response.status_code == status.HTTP_404_NOT_FOUND
+
+    @pytest.mark.asyncio
+    async def test_validate_after_too_much_time(
+        self, ac_client: AsyncClient, monkeypatch
+    ):
+        class MockDateTime(datetime.datetime):
+            @classmethod
+            def utcnow(cls):
+                return datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+
+        monkeypatch.setattr(minicap.api, "datetime", MockDateTime)
+
+        request = CaptchaValidationRequest(
+            id="valid-captcha-id", text="valid-captcha-solution"
+        ).model_dump()
+
+        response = await ac_client.post("/api/captcha/validate/", json=request)
+        assert response.status_code == status.HTTP_404_NOT_FOUND
