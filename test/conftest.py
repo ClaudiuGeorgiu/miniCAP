@@ -13,11 +13,11 @@ from minicap.api import get_session
 from minicap.database import Base, GeneratedCaptcha
 from minicap.main import app
 
-SQLITE_TEST_DATABASE_URL = "sqlite+aiosqlite:///" + os.path.abspath(
+SQLITE_TEST_DATABASE_PATH=os.path.abspath(
     os.path.join(os.path.dirname(__file__), "captcha.test.db")
 )
 
-engine = create_async_engine(SQLITE_TEST_DATABASE_URL)
+engine = create_async_engine("sqlite+aiosqlite:///" + SQLITE_TEST_DATABASE_PATH)
 async_test_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 
@@ -39,6 +39,8 @@ async def get_app() -> FastAPI:
     app.dependency_overrides[get_session] = override_get_session
 
     yield app
+
+    os.remove(SQLITE_TEST_DATABASE_PATH)
 
 
 @pytest_asyncio.fixture
