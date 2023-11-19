@@ -3,7 +3,7 @@
 import os
 from datetime import datetime
 
-from sqlalchemy import select, Column, String, DateTime
+from sqlalchemy import select, Column, String, DateTime, delete
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -29,6 +29,13 @@ async def add_captcha_to_db(session: AsyncSession, captcha_id: str, captcha_text
     await session.commit()
     await session.refresh(new_captcha)
     return new_captcha
+
+
+async def delete_captcha_from_db(session: AsyncSession, captcha_id: str):
+    await session.execute(
+        delete(GeneratedCaptcha).where(GeneratedCaptcha.id == captcha_id)
+    )
+    await session.commit()
 
 
 class GeneratedCaptcha(Base):

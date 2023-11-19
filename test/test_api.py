@@ -23,7 +23,7 @@ class TestApi(object):
     async def test_validate_not_found(self, ac_client: AsyncClient):
         response = await ac_client.post(
             "/api/captcha/validate/",
-            json=CaptchaValidationRequest(id="invalid", text="invalid").dict(),
+            json=CaptchaValidationRequest(id="invalid", text="invalid").model_dump(),
         )
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
@@ -33,7 +33,7 @@ class TestApi(object):
             "/api/captcha/validate/",
             json=CaptchaValidationRequest(
                 id="valid-captcha-id", text="valid-captcha-solution"
-            ).dict(),
+            ).model_dump(),
         )
         assert response.status_code == status.HTTP_200_OK
 
@@ -43,6 +43,6 @@ class TestApi(object):
             "/api/captcha/validate/",
             json=CaptchaValidationRequest(
                 id="valid-captcha-id", text="bad-captcha-solution"
-            ).dict(),
+            ).model_dump(),
         )
         assert response.status_code == status.HTTP_400_BAD_REQUEST

@@ -9,7 +9,12 @@ from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from minicap.captcha import Captcha
-from minicap.database import async_session, add_captcha_to_db, get_generated_captcha
+from minicap.database import (
+    async_session,
+    add_captcha_to_db,
+    delete_captcha_from_db,
+    get_generated_captcha,
+)
 from minicap.schemas import CaptchaValidationRequest, CaptchaValidationResponse
 
 logger = logging.getLogger(__name__)
@@ -105,6 +110,7 @@ async def validate_captcha(
         )
     if validation_request.text.lower() == existing_captcha.text.lower():
         # Make CAPTCHA validation case insensitive.
+        await delete_captcha_from_db(session, existing_captcha.id)
         response.status_code = status.HTTP_200_OK
         return CaptchaValidationResponse(
             status=response.status_code, message="CAPTCHA validated successfully"
