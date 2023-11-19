@@ -13,7 +13,7 @@ from minicap.api import get_session
 from minicap.database import Base, GeneratedCaptcha
 from minicap.main import app
 
-SQLITE_TEST_DATABASE_PATH=os.path.abspath(
+SQLITE_TEST_DATABASE_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "captcha.test.db")
 )
 
