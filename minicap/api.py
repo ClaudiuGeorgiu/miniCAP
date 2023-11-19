@@ -14,8 +14,11 @@ from minicap.database import (
     add_captcha_to_db,
     delete_captcha_from_db,
     get_generated_captcha,
+    increment_captcha_validation_counter,
 )
 from minicap.schemas import CaptchaValidationRequest, CaptchaValidationResponse
+
+MAX_VALIDATION_REQUESTS = 3
 
 logger = logging.getLogger(__name__)
 
@@ -110,12 +113,15 @@ async def validate_captcha(
         )
     if validation_request.text.lower() == existing_captcha.text.lower():
         # Make CAPTCHA validation case insensitive.
-        await delete_captcha_from_db(session, existing_captcha.id)
+        await delete_captcha_from_db(session, existing_captcha)
         response.status_code = status.HTTP_200_OK
         return CaptchaValidationResponse(
             status=response.status_code, message="CAPTCHA validated successfully"
         )
     else:
+        await increment_captcha_validation_counter(session, existing_captcha)
+        if existing_captcha.validation_counter >= MAX_VALIDATION_REQUESTS:
+            await delete_captcha_from_db(session, existing_captcha)
         response.status_code = status.HTTP_400_BAD_REQUEST
         return CaptchaValidationResponse(
             status=response.status_code, message="CAPTCHA validation failed"

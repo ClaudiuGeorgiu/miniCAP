@@ -3,7 +3,7 @@
 import os
 from datetime import datetime
 
-from sqlalchemy import select, Column, String, DateTime, delete
+from sqlalchemy import delete, select, Column, String, DateTime, Integer
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -15,6 +15,15 @@ engine = create_async_engine(SQLITE_DATABASE_URL)
 async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 Base = declarative_base()
+
+
+class GeneratedCaptcha(Base):
+    __tablename__ = "generated_captcha"
+
+    id = Column(String, primary_key=True, index=True)
+    text = Column(String, nullable=False)
+    timestamp = Column(DateTime, nullable=False, default=datetime.now)
+    validation_counter = Column(Integer, nullable=False, default=0)
 
 
 async def get_generated_captcha(session: AsyncSession, captcha_id: str):
@@ -31,16 +40,14 @@ async def add_captcha_to_db(session: AsyncSession, captcha_id: str, captcha_text
     return new_captcha
 
 
-async def delete_captcha_from_db(session: AsyncSession, captcha_id: str):
-    await session.execute(
-        delete(GeneratedCaptcha).where(GeneratedCaptcha.id == captcha_id)
-    )
+async def delete_captcha_from_db(session: AsyncSession, captcha: GeneratedCaptcha):
+    await session.delete(captcha)
     await session.commit()
 
 
-class GeneratedCaptcha(Base):
-    __tablename__ = "generated_captcha"
-
-    id = Column(String, primary_key=True, index=True)
-    text = Column(String, nullable=False)
-    timestamp = Column(DateTime, nullable=False, default=datetime.now)
+async def increment_captcha_validation_counter(
+    session: AsyncSession, captcha: GeneratedCaptcha
+):
+    captcha.validation_counter += 1
+    session.add(captcha)
+    await session.commit()

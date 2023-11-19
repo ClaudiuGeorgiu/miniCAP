@@ -9,7 +9,7 @@ from minicap.captcha import Captcha
 random.seed(21)
 
 
-class TestCaptcha(object):
+class TestCaptcha:
     def test_valid_default(self):
         captcha = Captcha()
         assert captcha.text == "Zba4Hf"

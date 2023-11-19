@@ -139,6 +139,12 @@ header and a text field `text` with the solution of the CAPTCHA.
 > While the microservice is running, the complete REST OpenAPI documentation is
 > available at <http://localhost:8000/docs>.
 
+> [!NOTE]  
+> Each CAPTCHA is deleted from the database after:
+> * 10 minutes since its creation
+> * a successful validation
+> * 3 unsuccessful validation requests
+
 #### Example usage with `curl`
 
 1. Request the generation of a new CAPTCHA image and save the result into a file

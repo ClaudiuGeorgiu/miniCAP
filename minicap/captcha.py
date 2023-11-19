@@ -7,7 +7,7 @@ import string
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 
-class Captcha(object):
+class Captcha:
     def __init__(self, text: str = None, width: int = 600, height: int = 200):
         self._text = text
         if not self._text:
