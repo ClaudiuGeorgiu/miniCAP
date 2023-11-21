@@ -1,12 +1,9 @@
-[tool.black]
+[project]
+name = "miniCAP"
+requires-python = ">=3.10"
+
+[tool.ruff]
 line-length = 88
-include = '\.pyi?$'
-exclude = '''
-(
-    /(
-      | \.git
-      | \.github
-      | venv
-    )/
-)
-'''
+
+[tool.ruff.lint]
+extend-select = ["I"]

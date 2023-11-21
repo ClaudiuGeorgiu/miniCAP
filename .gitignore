@@ -190,5 +190,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+.ruff_cache/
+
 captcha.db
 captcha.test.db
