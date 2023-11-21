@@ -3,9 +3,9 @@
 import os
 from datetime import datetime
 
-from sqlalchemy import delete, select, Column, String, DateTime, Integer
+from sqlalchemy import Column, DateTime, Integer, String, select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 SQLITE_DATABASE_URL = "sqlite+aiosqlite:///" + os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.path.pardir, "captcha.db")

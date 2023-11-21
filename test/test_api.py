@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 import datetime
-import minicap.api
 
 import pytest
 from fastapi import status
 from httpx import AsyncClient
 
+import minicap.api
 from minicap.schemas import CaptchaValidationRequest
 
 

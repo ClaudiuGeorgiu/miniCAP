@@ -3,16 +3,16 @@
 import io
 import logging
 import uuid
-
 from datetime import datetime, timedelta
+
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import Response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from minicap.captcha import Captcha
 from minicap.database import (
-    async_session,
     add_captcha_to_db,
+    async_session,
     delete_captcha_from_db,
     get_generated_captcha,
     increment_captcha_validation_counter,

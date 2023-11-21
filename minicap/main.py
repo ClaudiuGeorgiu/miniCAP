@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from minicap.api import api_router
-from minicap.database import engine, Base
+from minicap.database import Base, engine
 
 logging.getLogger("aiosqlite").level = logging.WARNING
 logging.getLogger("sqlalchemy").level = logging.WARNING

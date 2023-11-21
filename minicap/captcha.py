@@ -4,7 +4,7 @@ import os
 import random
 import string
 
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 class Captcha:
