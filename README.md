@@ -3,9 +3,9 @@
 > A simple and minimal microservice for generating and validating CAPTCHA.
 
 [![Codacy](https://app.codacy.com/project/badge/Grade/f0c8737e04c045269e23f8a35735c7d7)](https://app.codacy.com/gh/ClaudiuGeorgiu/miniCAP)
-[![Ubuntu Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/Ubuntu/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AUbuntu)
-[![Windows Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/Windows/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AWindows)
-[![MacOS Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/workflows/MacOS/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions?query=workflow%3AMacOS)
+[![Ubuntu Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/ubuntu.yml)
+[![Windows Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/windows.yml/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/windows.yml)
+[![MacOS Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/macos.yml/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/macos.yml)
 [![Code Coverage](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP/badge.svg)](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-green.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/blob/master/LICENSE)
