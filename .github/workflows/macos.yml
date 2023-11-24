@@ -33,8 +33,7 @@ jobs:
           python -m pip install -r ./requirements.test.txt
 
       - name: Run tests
-        run: |
-          pytest --verbose --cov=./ --cov-report xml
+        run: pytest --verbose --cov=./ --cov-report xml
 
       - name: Upload tests coverage to Codacy
         if: contains(github.event_name, 'pull_request') == false

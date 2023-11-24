@@ -1,0 +1,36 @@
+name: Ubuntu
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  auto-format:
+    name: Lint & format code with ruff
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install locust
+        run: python -m pip install locust
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          load: true
+          tags: minicap:latest
+
+      - name: Run Docker image
+        run: docker run -d -p 8000:8000 minicap
+
+      - name: Run locust
+        run: locust -f ./test/locust/locustfile.py --headless --users 30 --spawn-rate 5 --run-time 1m --host http://localhost:8000
