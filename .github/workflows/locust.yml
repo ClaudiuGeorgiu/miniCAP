@@ -38,5 +38,5 @@ jobs:
       - name: Run locust
         run: |
           locust -f ./test/locust/locustfile.py --headless \
-            --users 30 --spawn-rate 5 --run-time 1m --only-summary\
+            --users 50 --spawn-rate 10 --run-time 2m --only-summary \
             --host http://localhost:8000
