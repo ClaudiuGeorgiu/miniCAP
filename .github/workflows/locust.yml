@@ -1,4 +1,4 @@
-name: Ubuntu
+name: Locust
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  auto-format:
-    name: Lint & format code with ruff
+  stress-test:
+    name: Locust stress test
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,9 @@ jobs:
 
       - name: Run Docker image
         run: docker run -d -p 8000:8000 minicap
+
+      - name: Wait for Docker image to start
+        run: sleep 5
 
       - name: Run locust
         run: locust -f ./test/locust/locustfile.py --headless --users 30 --spawn-rate 5 --run-time 1m --host http://localhost:8000
