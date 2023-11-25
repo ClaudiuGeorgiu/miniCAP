@@ -8,6 +8,10 @@
             <path value="file://$PROJECT_DIR$/.github" />
             <path value="file://$PROJECT_DIR$/.github/workflows" />
             <path value="file://$PROJECT_DIR$/minicap/font" />
+            <path value="file://$PROJECT_DIR$/docs" />
+            <path value="file://$PROJECT_DIR$/docs/logo" />
+            <path value="file://$PROJECT_DIR$/docs/demo" />
+            <path value="file://$PROJECT_DIR$/docs/demo/img" />
           </resourceRoots>
         </entryData>
       </entry>

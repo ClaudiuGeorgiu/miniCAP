@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/logo.png)
+![Logo](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/logo/logo.png)
 
 > A simple and minimal microservice for generating and validating CAPTCHA.
 
@@ -15,6 +15,19 @@
 **miniCAP** is a simple microservice, written in Python, with only two REST endpoints:
 one for creating CAPTCHAs (`/api/captcha/generate/`) and one for verifying them
 (`/api/captcha/validate/`).
+
+
+
+## ❱ Demo
+
+Some random samples of CAPTCHAs generated with miniCAP:
+
+|                                                    |                                                          Light theme                                                          |                                                          Dark theme                                                          |
+|:--------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------:|
+|                     Only text                      |    ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/light.png)<br/>**wFKdfr**<br/>    |    ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/dark.png)<br/>**N9sx2G**<br/>    |
+|            Text +<br/>background noise             |  ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/light_bg.png)<br/>**A4G9bu**<br/>   |  ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/dark_bg.png)<br/>**D46JLk**<br/>   |
+|            Text +<br/>foreground noise             |  ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/light_fg.png)<br/>**Sx6pU7**<br/>   |  ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/dark_fg.png)<br/>**3mtNKE**<br/>   |
+| Text +<br/>background noise +<br/>foreground noise | ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/light_bg_fg.png)<br/>**MdEMFd**<br/> | ![CAPTCHA](https://raw.githubusercontent.com/ClaudiuGeorgiu/miniCAP/master/docs/demo/img/dark_bg_fg.png)<br/>**95ScZ5**<br/> |
 
 
 

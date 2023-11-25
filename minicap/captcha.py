@@ -7,8 +7,42 @@ import string
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
+class ColorUtils:
+    @staticmethod
+    def get_random_light_color() -> tuple[int, int, int]:
+        return (
+            random.randint(192, 255),
+            random.randint(192, 255),
+            random.randint(192, 255),
+        )
+
+    @staticmethod
+    def get_random_medium_color() -> tuple[int, int, int]:
+        return (
+            random.randint(128, 192),
+            random.randint(128, 192),
+            random.randint(128, 192),
+        )
+
+    @staticmethod
+    def get_random_dark_color() -> tuple[int, int, int]:
+        return (
+            random.randint(0, 96),
+            random.randint(0, 96),
+            random.randint(0, 96),
+        )
+
+
 class Captcha:
-    def __init__(self, text: str = None, width: int = 600, height: int = 200):
+    def __init__(
+        self,
+        text: str = None,
+        width: int = 600,
+        height: int = 200,
+        add_background_noise: bool = True,
+        add_foreground_noise: bool = True,
+        use_dark_theme: bool = False,
+    ):
         self._text = text
         if not self._text:
             # If no input text is provided, generate a random string of 6 characters.
@@ -24,14 +58,24 @@ class Captcha:
 
         self._width = width
         self._height = height
+        self._background_noise = add_background_noise
+        self._foreground_noise = add_foreground_noise
 
         self._base_font_size = self._width // (len(self._text) + 2)
 
-        self._font_path = os.path.join(
-            os.path.dirname(__file__), "font", "JetBrainsMono.ttf"
+        self._font_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), "font", "JetBrainsMono.ttf")
         )
         self._padding = 5
-        self._background_color = self._get_random_light_color()
+
+        if use_dark_theme:
+            fixed_color = ColorUtils.get_random_dark_color()
+            self._get_line_color = ColorUtils.get_random_medium_color
+            self._get_fill_color = lambda: fixed_color
+        else:
+            fixed_color = ColorUtils.get_random_light_color()
+            self._get_line_color = ColorUtils.get_random_dark_color
+            self._get_fill_color = lambda: fixed_color
 
         self._captcha_img = self._generate()
 
@@ -42,18 +86,6 @@ class Captcha:
     @property
     def image(self) -> Image:
         return self._captcha_img
-
-    @staticmethod
-    def _get_random_light_color() -> tuple[int, int, int]:
-        return (
-            random.randint(192, 255),
-            random.randint(192, 255),
-            random.randint(192, 255),
-        )
-
-    @staticmethod
-    def _get_random_dark_color() -> tuple[int, int, int]:
-        return random.randint(0, 96), random.randint(0, 96), random.randint(0, 96)
 
     def _draw_letter(self, letter: str) -> Image:
         # Use a different (random) font size every time this method is called.
@@ -80,8 +112,8 @@ class Captcha:
             (self._padding, self._padding),
             letter,
             font=letter_font,
-            fill=self._background_color,
-            stroke_fill=self._get_random_dark_color(),
+            fill=self._get_fill_color(),
+            stroke_fill=self._get_line_color(),
             stroke_width=stroke_width,
         )
 
@@ -116,7 +148,7 @@ class Captcha:
                 tmp_font = ImageFont.truetype(
                     self._font_path, size=random.randint(font_size // 2, font_size)
                 )
-                color = self._get_random_dark_color()
+                color = self._get_line_color()
 
                 letter_img = Image.new("RGBA", (2 * tmp_font.size, 2 * tmp_font.size))
                 ImageDraw.Draw(letter_img).text(
@@ -168,7 +200,7 @@ class Captcha:
                         x + block_size / 2 + r / 2 + x_offset,
                         y + block_size / 2 + r / 2 + y_offset,
                     ),
-                    fill=self._get_random_dark_color(),
+                    fill=self._get_line_color(),
                 )
 
         # Draw random lines (from left to right).
@@ -193,7 +225,7 @@ class Captcha:
             draw.line(
                 points,
                 joint="curve",
-                fill=self._get_random_dark_color(),
+                fill=self._get_line_color(),
                 width=random.randint(
                     self._base_font_size // 25, self._base_font_size // 15
                 ),
@@ -249,9 +281,10 @@ class Captcha:
         h_factor = (tmp_height - text_height) // 2
 
         # Prepare a CAPTCHA image of the right size to fit all the letters.
-        captcha_img = Image.new("RGBA", (tmp_width, tmp_height), self._background_color)
+        captcha_img = Image.new("RGB", (tmp_width, tmp_height), self._get_fill_color())
 
-        captcha_img = self._add_background_noise(captcha_img)
+        if self._background_noise:
+            captcha_img = self._add_background_noise(captcha_img)
 
         # Add all the letters to the image.
         for position, letter_img in enumerate(letters):
@@ -259,7 +292,8 @@ class Captcha:
                 letter_img, (x[position] + w_factor, y[position] + h_factor), letter_img
             )
 
-        captcha_img = self._add_foreground_noise(captcha_img)
+        if self._foreground_noise:
+            captcha_img = self._add_foreground_noise(captcha_img)
 
         captcha_img = captcha_img.filter(ImageFilter.SMOOTH)
 

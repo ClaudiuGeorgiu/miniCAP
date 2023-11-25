@@ -48,7 +48,7 @@ async def generate_captcha(session: AsyncSession = Depends(get_session)):
     captcha = Captcha()
     captcha_bytes = io.BytesIO()
 
-    captcha.image.save(captcha_bytes, format="png")
+    captcha.image.save(captcha_bytes, format="png", compress_level=3)
     captcha_bytes.seek(0)
 
     captcha_id = str(uuid.uuid4())

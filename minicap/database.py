@@ -36,7 +36,6 @@ async def add_captcha_to_db(session: AsyncSession, captcha_id: str, captcha_text
     new_captcha = GeneratedCaptcha(id=captcha_id, text=captcha_text)
     session.add(new_captcha)
     await session.commit()
-    await session.refresh(new_captcha)
     return new_captcha
 
 
