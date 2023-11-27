@@ -1,7 +1,7 @@
 -r requirements.txt
 
 httpx==0.25.2
-locust==2.19.0
+locust==2.19.1
 pytest==7.4.3
 pytest-asyncio==0.21.1
 pytest-cov==4.1.0
