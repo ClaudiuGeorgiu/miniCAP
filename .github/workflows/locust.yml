@@ -24,7 +24,7 @@ jobs:
         run: python -m pip install locust
 
       - name: Build Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           load: true
           tags: minicap:latest
