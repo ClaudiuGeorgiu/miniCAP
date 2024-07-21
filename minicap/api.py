@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 api_router = APIRouter(prefix="/api")
 
 
-async def get_session() -> AsyncSession:
+async def get_session():
     async with async_session() as session:
         yield session
 
@@ -112,7 +112,7 @@ async def validate_captcha(
     if (
         existing_captcha
         and existing_captcha.timestamp + timedelta(minutes=MAX_DURATION_IN_MINUTES)
-        <= datetime.utcnow()
+        <= datetime.now()
     ):
         await delete_captcha_from_db(session, existing_captcha)
         existing_captcha = None

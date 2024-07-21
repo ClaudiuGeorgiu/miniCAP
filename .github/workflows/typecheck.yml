@@ -1,0 +1,24 @@
+name: Typecheck
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  auto-format:
+    name: Typecheck code with mypy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install mypy
+
+      - name: Typecheck code with mypy
+        run: mypy .

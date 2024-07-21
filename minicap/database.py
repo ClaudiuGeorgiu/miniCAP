@@ -3,27 +3,29 @@
 import os
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Integer, String, select
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import String, select
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 SQLITE_DATABASE_URL = "sqlite+aiosqlite:///" + os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.path.pardir, "captcha.db")
 )
 
 engine = create_async_engine(SQLITE_DATABASE_URL)
-async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
-Base = declarative_base()
+
+class Base(DeclarativeBase):
+    pass
 
 
 class GeneratedCaptcha(Base):
     __tablename__ = "generated_captcha"
 
-    id = Column(String, primary_key=True, index=True)
-    text = Column(String, nullable=False)
-    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
-    validation_counter = Column(Integer, nullable=False, default=0)
+    id: Mapped[str] = mapped_column(primary_key=True, index=True)
+    text: Mapped[str] = mapped_column(String(10), nullable=False)
+    timestamp: Mapped[datetime] = mapped_column(default=datetime.now)
+    validation_counter: Mapped[int] = mapped_column(default=0)
 
 
 async def get_generated_captcha(session: AsyncSession, captcha_id: str):

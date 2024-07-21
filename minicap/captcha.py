@@ -5,6 +5,7 @@ import random
 import string
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL.Image import Image as img
 
 
 class ColorUtils:
@@ -36,15 +37,16 @@ class ColorUtils:
 class Captcha:
     def __init__(
         self,
-        text: str = None,
+        text: str | None = None,
         width: int = 600,
         height: int = 200,
         add_background_noise: bool = True,
         add_foreground_noise: bool = True,
         use_dark_theme: bool = False,
     ):
-        self._text = text
-        if not self._text:
+        if text:
+            self._text = text
+        else:
             # If no input text is provided, generate a random string of 6 characters.
             # Some similar letters have been removed intentionally (e.g., 0 and O).
             self._text = "".join(
@@ -84,10 +86,10 @@ class Captcha:
         return self._text
 
     @property
-    def image(self) -> Image:
+    def image(self) -> img:
         return self._captcha_img
 
-    def _draw_letter(self, letter: str) -> Image:
+    def _draw_letter(self, letter: str) -> img:
         # Use a different (random) font size every time this method is called.
         letter_font = ImageFont.truetype(
             self._font_path,
@@ -125,7 +127,7 @@ class Captcha:
 
         return letter_img
 
-    def _add_background_noise(self, input_img: Image) -> Image:
+    def _add_background_noise(self, input_img: img) -> img:
         output_img = input_img.copy()
 
         y_block_size = (output_img.size[1] - 2 * self._padding) // 4
@@ -150,7 +152,9 @@ class Captcha:
                 )
                 color = self._get_line_color()
 
-                letter_img = Image.new("RGBA", (2 * tmp_font.size, 2 * tmp_font.size))
+                letter_img = Image.new(
+                    "RGBA", (int(2 * tmp_font.size), int(2 * tmp_font.size))
+                )
                 ImageDraw.Draw(letter_img).text(
                     (1, 1),
                     random.choice(string.digits + string.ascii_letters),
@@ -181,7 +185,7 @@ class Captcha:
 
         return output_img
 
-    def _add_foreground_noise(self, input_img: Image) -> Image:
+    def _add_foreground_noise(self, input_img: img) -> img:
         output_img = input_img.copy()
         draw = ImageDraw.Draw(output_img)
 
@@ -233,7 +237,7 @@ class Captcha:
 
         return output_img
 
-    def _generate(self) -> Image:
+    def _generate(self) -> img:
         letters = [self._draw_letter(letter) for letter in self.text]
 
         # Calculate the position where to place all the letters in the image, starting

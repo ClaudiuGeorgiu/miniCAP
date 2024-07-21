@@ -3,11 +3,9 @@
 import os
 
 import pytest_asyncio
-from fastapi import FastAPI
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from sqlalchemy import insert
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from minicap.api import get_session
 from minicap.database import Base, GeneratedCaptcha
@@ -18,11 +16,13 @@ SQLITE_TEST_DATABASE_PATH = os.path.abspath(
 )
 
 engine = create_async_engine("sqlite+aiosqlite:///" + SQLITE_TEST_DATABASE_PATH)
-async_test_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+async_test_session = async_sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
 @pytest_asyncio.fixture
-async def get_app() -> FastAPI:
+async def get_app():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
@@ -44,6 +44,8 @@ async def get_app() -> FastAPI:
 
 
 @pytest_asyncio.fixture
-async def ac_client(get_app: FastAPI) -> AsyncClient:
-    async with AsyncClient(app=get_app, base_url="http://test") as client:
+async def ac_client(get_app):
+    async with AsyncClient(
+        transport=ASGITransport(app=get_app), base_url="http://test"
+    ) as client:
         yield client
