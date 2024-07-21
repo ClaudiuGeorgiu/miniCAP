@@ -55,6 +55,9 @@ jobs:
     needs: test
     name: Push updated version to Docker Hub
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
 
     steps:
       - name: Checkout repository
@@ -78,15 +81,23 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: claudiugeorgiu/minicap
+          images: index.docker.io/claudiugeorgiu/minicap
           tags: |
             type=raw,value=latest
             type=semver,pattern={{version}}
 
       - name: Build and push
+        id: push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Generate Docker image attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: index.docker.io/claudiugeorgiu/minicap
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
