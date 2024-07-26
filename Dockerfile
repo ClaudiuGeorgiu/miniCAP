@@ -1,5 +1,8 @@
 FROM python:3.12-alpine
 
+RUN adduser -D minicap
+USER minicap
+
 WORKDIR /app/
 
 # Copy requirements and install.
