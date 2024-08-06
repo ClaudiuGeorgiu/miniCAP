@@ -1,6 +1,6 @@
 aiosqlite==0.20.0
-fastapi==0.111.1
+fastapi==0.112.0
 Pillow==10.4.0
 pydantic==2.8.2
-SQLAlchemy==2.0.31
-uvicorn==0.30.3
+SQLAlchemy==2.0.32
+uvicorn==0.30.5
