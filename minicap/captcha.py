@@ -108,7 +108,7 @@ class Captcha:
             stroke_width=stroke_width,
         )
 
-        letter_img = Image.new("RGBA", (w, h))
+        letter_img = Image.new("RGBA", (int(w), int(h)))
 
         ImageDraw.Draw(letter_img).text(
             (self._padding, self._padding),
