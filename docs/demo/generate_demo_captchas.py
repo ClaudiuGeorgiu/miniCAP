@@ -28,10 +28,10 @@ def main():
                 )
 
                 img_name = (
-                    f'{"dark" if th else "light"}'
-                    f'{"_bg" if bg else ""}'
-                    f'{"_fg" if fg else ""}'
-                    f'.png'
+                    f"{'dark' if th else 'light'}"
+                    f"{'_bg' if bg else ''}"
+                    f"{'_fg' if fg else ''}"
+                    f".png"
                 )
 
                 img_path = os.path.abspath(
