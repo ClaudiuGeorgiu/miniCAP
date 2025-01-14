@@ -1,6 +1,6 @@
 aiosqlite==0.20.0
 fastapi==0.115.6
 Pillow==11.1.0
-pydantic==2.10.4
-SQLAlchemy[asyncio]==2.0.36
+pydantic==2.10.5
+SQLAlchemy[asyncio]==2.0.37
 uvicorn==0.34.0
