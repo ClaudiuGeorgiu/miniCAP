@@ -4,7 +4,7 @@ import os
 
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
-from sqlalchemy import insert
+from sqlalchemy import NullPool, insert
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from minicap.api import get_session
@@ -15,14 +15,16 @@ SQLITE_TEST_DATABASE_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "captcha.test.db")
 )
 
-engine = create_async_engine("sqlite+aiosqlite:///" + SQLITE_TEST_DATABASE_PATH)
-async_test_session = async_sessionmaker(
-    engine, class_=AsyncSession, expire_on_commit=False
-)
-
 
 @pytest_asyncio.fixture
 async def get_app():
+    engine = create_async_engine(
+        "sqlite+aiosqlite:///" + SQLITE_TEST_DATABASE_PATH, poolclass=NullPool
+    )
+    async_test_session = async_sessionmaker(
+        engine, class_=AsyncSession, expire_on_commit=False
+    )
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
