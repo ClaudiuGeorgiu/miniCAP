@@ -1,12 +1,19 @@
 .git/
 .github/
 .idea/
+.venv/
+.mypy_cache/
+.pytest_cache/
+docs/
 test/
+README.md
 
 **/*.pyc
 **/__pycache__
 
+.dockerignore
+Dockerfile
+.python-version
 .gitignore
-pyproject.toml
 .coveragerc
 .codecov.yml
