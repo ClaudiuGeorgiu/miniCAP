@@ -118,7 +118,7 @@ miniCAP is now ready to be used, run the following command to start the service 
 
 ```Shell
 $ # Make sure to run the command in miniCAP/ directory.
-$ uv run python -m minicap.main
+$ uv run -m minicap.main
 ```
 
 miniCAP microservice is now running, see the [usage instructions](#-usage) for more
