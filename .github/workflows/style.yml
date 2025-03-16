@@ -13,16 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: '3.13'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
 
-      - run: pip install ruff
+      - name: Install project dev dependencies
+        run: uv sync --only-dev
 
       - name: Lint & format code with ruff and commit any changes
         run: |
-          ruff check --output-format=github --fix .
-          ruff format .
+          uv ruff check --output-format=github --fix .
+          uv ruff format .
           git config --global user.name 'Auto ruff formatter'
           git config --global user.email 'claudiugeorgiu@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
