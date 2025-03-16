@@ -54,7 +54,7 @@ a recent version of Docker installed:
 
 ```Shell
 $ docker --version
-Docker version 20.10.22, build 3a2c30b
+Docker version 28.0.1, build 068a01e
 ```
 
 #### Official Docker Hub image
@@ -77,7 +77,7 @@ otherwise execute the following command in the previously created `miniCAP/` dir
 
 ```Shell
 $ # Make sure to run the command in miniCAP/ directory.
-$ # It will take some time to download and install all the dependencies.
+$ # It will download and install all the project's dependencies.
 $ docker build -t minicap .
 ```
 
@@ -99,8 +99,7 @@ information.
 
 #### Prerequisites
 
-The only requirement of this project is a working `Python 3` (at least `3.10`)
-installation (along with its package manager `pip`).
+The only requirement of this project is [uv](https://github.com/astral-sh/uv).
 
 #### Install
 
@@ -108,14 +107,8 @@ Run the following commands in the main directory of the project (`miniCAP/`) to
 install the needed dependencies:
 
 ```Shell
-$ # Make sure to run the commands in miniCAP/ directory.
-
-$ # The usage of a virtual environment is highly recommended.
-$ python3 -m venv venv
-$ source venv/bin/activate
-
-$ # Install miniCAP's requirements.
-$ python3 -m pip install -r requirements.txt
+$ # Make sure to run the command in miniCAP/ directory.
+$ uv sync --frozen --no-dev
 ```
 
 #### Start miniCAP
@@ -125,7 +118,7 @@ miniCAP is now ready to be used, run the following command to start the service 
 
 ```Shell
 $ # Make sure to run the command in miniCAP/ directory.
-$ python3 -m minicap.main
+$ uv run python -m minicap.main
 ```
 
 miniCAP microservice is now running, see the [usage instructions](#-usage) for more
@@ -213,17 +206,17 @@ res.raise_for_status()
 
 ## ❱ Test
 
-Run the following command in the main directory of the project (`miniCAP/`) to install
-the test dependencies (needed only the first time):
+Run the following command in the main directory of the project (`miniCAP/`) to also
+install test dependencies (needed only the first time):
 
 ```Shell
-$ python3 -m pip install -r requirements.test.txt
+$ uv sync --frozen
 ```
 
 Then run the following command to execute the automatic test suite:
 
 ```Shell
-$ python3 -m pytest --verbose
+$ uv run pytest --verbose
 ```
 
 
