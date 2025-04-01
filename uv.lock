@@ -749,7 +749,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "pillow" },
     { name = "pydantic" },
-    { name = "sqlalchemy" },
+    { name = "sqlalchemy", extra = ["asyncio"] },
     { name = "uvicorn" },
 ]
 
@@ -766,12 +766,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aiosqlite", specifier = "==0.21.0" },
-    { name = "fastapi", specifier = "==0.115.12" },
-    { name = "pillow", specifier = "==11.1.0" },
+    { name = "aiosqlite", specifier = ">=0.20.0" },
+    { name = "fastapi", specifier = ">=0.115.3" },
+    { name = "pillow", specifier = ">=11.0.0" },
     { name = "pydantic", specifier = ">=2.9.2" },
-    { name = "sqlalchemy", specifier = "==2.0.39" },
-    { name = "uvicorn", specifier = "==0.34.0" },
+    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.0.36" },
+    { name = "uvicorn", specifier = ">=0.32.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -1330,6 +1330,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b4/60/76714cecb528da46bc53a0dd36d1ccef2f74ef25448b630a0a760ad07bdb/sqlalchemy-2.0.39-cp313-cp313-win32.whl", hash = "sha256:23c5aa33c01bd898f879db158537d7e7568b503b15aad60ea0c8da8109adf3e7", size = 2075315 },
     { url = "https://files.pythonhosted.org/packages/5b/7c/76828886d913700548bac5851eefa5b2c0251ebc37921fe476b93ce81b50/sqlalchemy-2.0.39-cp313-cp313-win_amd64.whl", hash = "sha256:4dabd775fd66cf17f31f8625fc0e4cfc5765f7982f94dc09b9e5868182cb71c0", size = 2099175 },
     { url = "https://files.pythonhosted.org/packages/7b/0f/d69904cb7d17e65c65713303a244ec91fd3c96677baf1d6331457fd47e16/sqlalchemy-2.0.39-py3-none-any.whl", hash = "sha256:a1c6b0a5e3e326a466d809b651c63f278b1256146a377a528b6938a279da334f", size = 1898621 },
+]
+
+[package.optional-dependencies]
+asyncio = [
+    { name = "greenlet" },
 ]
 
 [[package]]
