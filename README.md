@@ -118,7 +118,7 @@ miniCAP is now ready to be used, run the following command to start the service 
 
 ```Shell
 $ # Make sure to run the command in miniCAP/ directory.
-$ uv run -m minicap.main
+$ uv run --frozen -m minicap.main
 ```
 
 miniCAP microservice is now running, see the [usage instructions](#-usage) for more
@@ -216,7 +216,7 @@ $ uv sync --frozen
 Then run the following command to execute the automatic test suite:
 
 ```Shell
-$ uv run pytest --verbose
+$ uv run --frozen pytest --verbose
 ```
 
 

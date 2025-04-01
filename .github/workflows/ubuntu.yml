@@ -30,10 +30,10 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install project
-        run: uv sync --all-extras
+        run: uv sync --frozen --all-extras
 
       - name: Run tests
-        run: uv run pytest --verbose --cov=./ --cov-report xml
+        run: uv run --frozen pytest --verbose --cov=./ --cov-report xml
 
       - name: Upload tests coverage to Codacy
         if: contains(github.event_name, 'pull_request') == false

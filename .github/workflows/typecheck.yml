@@ -22,7 +22,7 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install project
-        run: uv sync --all-extras
+        run: uv sync --frozen --all-extras
 
       - name: Typecheck code with mypy
-        run: uv run mypy .
+        run: uv run --frozen mypy .

@@ -23,7 +23,7 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install project dev dependencies
-        run: uv sync --only-dev
+        run: uv sync --frozen --only-dev
 
       - name: Build Docker image
         uses: docker/build-push-action@v6

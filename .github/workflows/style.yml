@@ -21,12 +21,12 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install project dev dependencies
-        run: uv sync --only-dev
+        run: uv sync --frozen --only-dev
 
       - name: Lint & format code with ruff and commit any changes
         run: |
-          uv run ruff check --output-format=github --fix .
-          uv run ruff format .
+          uv run --frozen ruff check --output-format=github --fix .
+          uv run --frozen ruff format .
           git config --global user.name 'Auto ruff formatter'
           git config --global user.email 'claudiugeorgiu@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
