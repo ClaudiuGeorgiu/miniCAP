@@ -26,8 +26,8 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
+          activate-environment: true
           enable-cache: true
-          cache-dependency-glob: uv.lock
 
       - name: Install project
         run: uv sync --frozen --all-extras
