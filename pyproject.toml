@@ -7,7 +7,7 @@ dependencies = [
     "aiosqlite==0.21.0",
     "fastapi==0.115.12",
     "pillow==11.2.1",
-    "pydantic==2.11.3",
+    "pydantic==2.11.4",
     "sqlalchemy[asyncio]==2.0.40",
     "uvicorn==0.34.2",
 ]
