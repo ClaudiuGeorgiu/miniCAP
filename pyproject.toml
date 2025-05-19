@@ -8,7 +8,7 @@ dependencies = [
     "fastapi==0.115.12",
     "pillow==11.2.1",
     "pydantic==2.11.4",
-    "sqlalchemy[asyncio]==2.0.40",
+    "sqlalchemy[asyncio]==2.0.41",
     "uvicorn==0.34.2",
 ]
 
