@@ -61,8 +61,8 @@ class TestApi:
     ):
         class MockDateTime(datetime.datetime):
             @classmethod
-            def now(cls):
-                return datetime.datetime.now() + datetime.timedelta(minutes=30)
+            def now(cls, tz=None):
+                return datetime.datetime.now(tz) + datetime.timedelta(minutes=30)
 
         monkeypatch.setattr(minicap.api, "datetime", MockDateTime)
 

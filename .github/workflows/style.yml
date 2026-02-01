@@ -16,7 +16,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: '3.13'
+          python-version: "3.13"
           activate-environment: true
           enable-cache: true
 
@@ -25,8 +25,8 @@ jobs:
 
       - name: Lint & format code with ruff and commit any changes
         run: |
-          uv run --frozen ruff check --output-format=github --fix .
-          uv run --frozen ruff format .
+          uv run --frozen --only-dev ruff check --output-format=github --fix .
+          uv run --frozen --only-dev ruff format .
           git config --global user.name 'Auto ruff formatter'
           git config --global user.email 'claudiugeorgiu@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY

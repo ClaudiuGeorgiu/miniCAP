@@ -16,11 +16,11 @@ dependencies = [
 dev = [
     "httpx~=0.28",
     "locust~=2.43",
-    "mypy~=1.19",
     "pytest-asyncio~=1.3",
     "pytest-cov~=7.0",
     "pytest~=9.0",
     "ruff~=0.14",
+    "ty~=0.0",
 ]
 
 [tool.pytest.ini_options]

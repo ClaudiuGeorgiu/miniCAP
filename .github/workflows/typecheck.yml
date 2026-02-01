@@ -8,7 +8,7 @@ on:
 
 jobs:
   typecheck:
-    name: Typecheck code with mypy
+    name: Typecheck code with ty
     runs-on: ubuntu-latest
 
     steps:
@@ -17,12 +17,12 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: '3.13'
+          python-version: "3.13"
           activate-environment: true
           enable-cache: true
 
       - name: Install project
         run: uv sync --frozen --all-extras
 
-      - name: Typecheck code with mypy
-        run: uv run --frozen mypy .
+      - name: Typecheck code with ty
+        run: uv run --frozen ty check

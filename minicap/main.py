@@ -41,7 +41,7 @@ app = FastAPI(
 # Needed if the API is used by a browser. Origins should be set to the allowed domains
 # instead of wildcard.
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware,  # type: ignore[invalid-argument-type]
     allow_origins=["*"],
     allow_methods=["GET", "POST"],
     expose_headers=["captcha_id"],
