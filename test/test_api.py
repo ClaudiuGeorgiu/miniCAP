@@ -20,7 +20,7 @@ class TestApi:
     @pytest.mark.asyncio
     async def test_validate_invalid_request(self, ac_client: AsyncClient):
         response = await ac_client.post("/api/captcha/validate/")
-        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_CONTENT
 
     @pytest.mark.asyncio
     async def test_validate_not_found(self, ac_client: AsyncClient):
