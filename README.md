@@ -54,7 +54,7 @@ a recent version of Docker installed:
 
 ```Shell
 $ docker --version
-Docker version 28.0.1, build 068a01e
+Docker version 29.1.5, build 0e6fee6
 ```
 
 #### Official Docker Hub image
@@ -147,7 +147,7 @@ header and a text field `text` with the solution of the CAPTCHA.
 
 > [!NOTE]  
 > Each CAPTCHA is deleted from the database after:
-> * 10 minutes since its creation
+> * 10 minutes after its creation
 > * a successful validation
 > * 3 unsuccessful validation requests
 
