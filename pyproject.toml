@@ -4,23 +4,23 @@ version = "1.1.0"
 description = "A simple and minimal microservice for generating and validating CAPTCHA"
 requires-python = ">=3.10"
 dependencies = [
-    "aiosqlite==0.22.1",
-    "fastapi==0.128.0",
-    "pillow==12.1.0",
-    "pydantic==2.12.5",
-    "sqlalchemy[asyncio]==2.0.46",
-    "uvicorn==0.40.0",
+    "aiosqlite~=0.22",
+    "fastapi~=0.128",
+    "pillow~=12.1",
+    "pydantic~=2.12",
+    "sqlalchemy[asyncio]~=2.0",
+    "uvicorn~=0.40",
 ]
 
-[tool.uv]
-dev-dependencies = [
-    "httpx==0.28.1",
-    "locust==2.37.14",
-    "mypy==1.17.0",
-    "pytest-asyncio==1.1.0",
-    "pytest-cov==6.2.1",
-    "pytest==8.4.1",
-    "ruff==0.12.5",
+[dependency-groups]
+dev = [
+    "httpx~=0.28",
+    "locust~=2.43",
+    "mypy~=1.19",
+    "pytest-asyncio~=1.3",
+    "pytest-cov~=7.0",
+    "pytest~=9.0",
+    "ruff~=0.14",
 ]
 
 [tool.pytest.ini_options]
