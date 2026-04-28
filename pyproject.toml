@@ -9,7 +9,7 @@ dependencies = [
     "pillow~=12.1",
     "pydantic~=2.13",
     "sqlalchemy[asyncio]~=2.0",
-    "uvicorn~=0.40",
+    "uvicorn~=0.46",
 ]
 
 [dependency-groups]
