@@ -5,7 +5,7 @@ description = "A simple and minimal microservice for generating and validating C
 requires-python = ">=3.10"
 dependencies = [
     "aiosqlite~=0.22",
-    "fastapi~=0.137",
+    "fastapi~=0.138",
     "pillow~=12.1",
     "pydantic~=2.13",
     "sqlalchemy[asyncio]~=2.0",
