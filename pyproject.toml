@@ -9,13 +9,13 @@ dependencies = [
     "pillow~=12.3",
     "pydantic~=2.13",
     "sqlalchemy[asyncio]~=2.0",
-    "uvicorn~=0.50",
+    "uvicorn~=0.51",
 ]
 
 [dependency-groups]
 dev = [
     "httpx~=0.28",
-    "locust~=2.44",
+    "locust~=2.45",
     "pytest-asyncio~=1.3",
     "pytest-cov~=7.0",
     "pytest~=9.1",
