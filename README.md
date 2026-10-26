@@ -7,7 +7,7 @@
 [![Windows Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/windows.yml/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/windows.yml)
 [![MacOS Build Status](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/macos.yml/badge.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/actions/workflows/macos.yml)
 [![Code Coverage](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP/badge.svg)](https://codecov.io/gh/ClaudiuGeorgiu/miniCAP)
-[![Python Version](https://img.shields.io/badge/Python-3.10%2B-green.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Python Version](https://img.shields.io/badge/Python-3.11%2B-green.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ClaudiuGeorgiu/miniCAP/blob/master/LICENSE)
 
 
@@ -35,7 +35,7 @@ Some random samples of CAPTCHAs generated with miniCAP:
 
 There are two ways of getting a working copy of miniCAP on your own computer: either
 by [using Docker](#docker-image) or by [using directly the source code](#from-source)
-in a `Python 3` (at least `3.10`) environment. In both cases, the first thing to do is
+in a `Python 3` (at least `3.11`) environment. In both cases, the first thing to do is
 to get a local copy of this repository, so open up a terminal in the directory where you
 want to save the project and clone the repository:
 

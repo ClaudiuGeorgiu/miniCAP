@@ -2,11 +2,11 @@
 name = "miniCAP"
 version = "1.1.0"
 description = "A simple and minimal microservice for generating and validating CAPTCHA"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "aiosqlite~=0.22",
     "fastapi~=0.141",
-    "pillow~=12.3",
+    "pillow~=13.0",
     "pydantic~=2.13",
     "sqlalchemy[asyncio]~=2.0",
     "uvicorn~=0.52",
