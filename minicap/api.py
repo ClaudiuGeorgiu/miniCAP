@@ -4,6 +4,7 @@ import io
 import logging
 import uuid
 from datetime import datetime, timedelta
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import Response
@@ -44,7 +45,7 @@ async def get_session():
         },
     },
 )
-async def generate_captcha(session: AsyncSession = Depends(get_session)):
+async def generate_captcha(session: Annotated[AsyncSession, Depends(get_session)]):
     captcha = Captcha()
     captcha_bytes = io.BytesIO()
 
@@ -105,7 +106,7 @@ async def generate_captcha(session: AsyncSession = Depends(get_session)):
 async def validate_captcha(
     response: Response,
     validation_request: CaptchaValidationRequest,
-    session: AsyncSession = Depends(get_session),
+    session: Annotated[AsyncSession, Depends(get_session)],
 ):
     existing_captcha = await get_generated_captcha(session, validation_request.id)
 

@@ -48,7 +48,7 @@ class TestApi:
             id="valid-captcha-id", text="bad-captcha-solution"
         ).model_dump()
 
-        for _ in range(0, 3):
+        for _ in range(3):
             response = await ac_client.post("/api/captcha/validate/", json=request)
             assert response.status_code == status.HTTP_400_BAD_REQUEST
 

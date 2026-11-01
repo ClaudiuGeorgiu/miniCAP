@@ -260,10 +260,7 @@ class Captcha:
 
         # Use the tallest letter to calculate text height.
         text_height = 2 * self._padding + max(
-            map(
-                lambda item: item[0] + item[1],
-                zip(y, map(lambda letter: letter.size[1], letters)),
-            )
+            item[0] + item[1] for item in zip(y, (letter.size[1] for letter in letters))
         )
 
         # Set width and height so that all the content will fit correctly.
