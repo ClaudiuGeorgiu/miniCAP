@@ -5,14 +5,16 @@ import logging
 from locust import HttpUser, SequentialTaskSet, between, events, run_single_user, task
 from locust.env import Environment
 
+logger = logging.getLogger(__name__)
+
 
 @events.quitting.add_listener
 def on_quit(environment: Environment):
     if environment.stats.total.fail_ratio > 0.01:
-        logging.error("Test failed due to failure ratio > 1%")
+        logger.error("Test failed due to failure ratio > 1%")
         environment.process_exit_code = 1
     elif environment.stats.total.avg_response_time > 200:
-        logging.error("Test failed due to average response time ratio > 500 ms")
+        logger.error("Test failed due to average response time ratio > 500 ms")
         environment.process_exit_code = 1
     else:
         environment.process_exit_code = 0

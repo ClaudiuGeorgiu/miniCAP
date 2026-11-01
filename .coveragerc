@@ -3,7 +3,7 @@ concurrency = greenlet
 branch = True
 omit =
     # Omit virtualenv directory.
-    venv/*
+    .venv/*
     # Omit test directory.
     test/*
 
